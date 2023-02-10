@@ -2,7 +2,7 @@ steps:
 - label: build image with cnb buildpack
   agents:
     queue: kubernetes
-  artifact_paths: "report.toml"
+  artifact_paths: "/tmp/report.toml"
   plugins:
   - kubernetes:
       podSpec:
