@@ -1,0 +1,18 @@
+steps:
+- label: run pytest
+  agents:
+    queue: kubernetes
+  artifact_paths: "report.toml"
+  plugins:
+  - kubernetes:
+      podSpec:
+        containers:
+        - image: gcr.io/buildpacks/builder:latest
+          command: [.buildkite/steps/image.sh]
+          volumeMounts:
+          - mountPath: /home/cnb/.docker
+            name: ghcr-secret
+        volumes:
+        - name: ghcr-secret
+          secret:
+            secretName: ghcr-secret
